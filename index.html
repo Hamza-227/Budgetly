@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgetly | Professional Personal Finance Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Pages -->
+    <div id="auth-container" class="auth-container">
+        <!-- Floating background elements -->
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="auth-left">
+            <div class="brand-hero">
+                <h1>Budgetly</h1>
+                <p>Professional Personal Finance Tracker that helps you take control of your money, track expenses, and achieve your financial goals with ease.</p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-chart-line"></i> Smart financial analytics & insights</li>
+                    <li><i class="fas fa-shield-alt"></i> Bank-level security & data privacy</li>
+                    <li><i class="fas fa-sync-alt"></i> Real-time transaction synchronization</li>
+                    <li><i class="fas fa-bell"></i> Custom alerts & budgeting goals</li>
+                    <li><i class="fas fa-mobile-alt"></i> Mobile-friendly & accessible anywhere</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="auth-right">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <h2 id="auth-title">Welcome Back</h2>
+                    <p id="auth-subtitle">Sign in to your Budgetly account</p>
+                </div>
+                
+                <div id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="login-email" placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                    <div class="auth-link">
+                        Don't have an account? <a href="#" id="show-signup">Create one now</a>
+                    </div>
+                </div>
+                
+                <div id="signup-form" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="signup-name" placeholder="John Doe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signup-email" placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signup-password" placeholder="Create a strong password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signup-confirm-password" placeholder="Confirm your password">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="signup-btn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    <div class="auth-link">
+                        Already have an account? <a href="#" id="show-login">Sign in instead</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main App -->
+    <div id="app-container" class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Budgetly</h1>
+                </div>
+                
+                <div class="user-area">
+                    <div class="currency-selector">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <select id="currency-select">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="JPY">JPY (¥)</option>
+                            <option value="CAD">CAD (C$)</option>
+                            <option value="AUD">AUD (A$)</option>
+                            <option value="PKR">PKR (₨)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">JD</div>
+                        <span id="user-name">John Doe</span>
+                    </div>
+                    
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <ul class="nav-list">
+                <li class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </li>
+                <li class="nav-item" data-page="add-transaction">
+                    <i class="fas fa-plus-circle"></i> Add Transaction
+                </li>
+                <li class="nav-item" data-page="reports">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </li>
+                <li class="nav-item" data-page="transactions">
+                    <i class="fas fa-exchange-alt"></i> All Transactions
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Dashboard Page -->
+            <section id="dashboard-page" class="page active">
+                <div class="page-header">
+                    <h2 class="page-title">Financial Dashboard</h2>
+                    <div class="date-display">May 1, 2023 - May 31, 2023</div>
+                </div>
+                
+                <div class="summary-cards">
+                    <div class="card income">
+                        <div class="card-header">
+                            <div class="card-title">Total Income</div>
+                            <div class="card-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="total-income">$4,850.00</div>
+                        <div class="card-change">+12% from last month</div>
+                    </div>
+                    
+                    <div class="card expense">
+                        <div class="card-header">
+                            <div class="card-title">Total Expenses</div>
+                            <div class="card-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="total-expenses">$3,240.50</div>
+                        <div class="card-change">-5% from last month</div>
+                    </div>
+                    
+                    <div class="card balance">
+                        <div class="card-header">
+                            <div class="card-title">Current Balance</div>
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="current-balance">$1,609.50</div>
+                        <div class="card-change">+$320 from last month</div>
+                    </div>
+                </div>
+                
+                <!-- Transaction Slider - Centered with indicator line -->
+                <div class="transaction-slider-container">
+                    <div class="slider-header">
+                        <h3 class="slider-title">Recent Transactions</h3>
+                        <div class="slider-controls">
+                            <button class="slider-btn" id="prev-slide">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-btn" id="next-slide">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-slider-wrapper">
+                        <div class="transaction-slider" id="transaction-slider">
+                            <!-- Transaction slides will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Slider Indicator Line with Dots -->
+                    <div class="slider-indicator" id="slider-indicator">
+                        <!-- Dots will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="recent-transactions">
+                    <h3 class="slider-title">Transaction History</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-transactions">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Enhanced Add Transaction Page -->
+            <section id="add-transaction-page" class="page">
+                <div class="transaction-form-container">
+                    <div class="form-header">
+                        <h2>Add New Transaction</h2>
+                        <p>Record your income or expense with detailed information</p>
+                    </div>
+                    
+                    <div class="form-body">
+                        <div class="type-selector">
+                            <div class="type-btn income-btn active" data-type="income">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>Income</span>
+                            </div>
+                            <div class="type-btn expense-btn" data-type="expense">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>Expense</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="transaction-date">
+                                    <i class="far fa-calendar-alt"></i> Date
+                                </label>
+                                <input type="date" id="transaction-date" class="form-control" value="2023-05-15">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="transaction-amount">
+                                    <i class="fas fa-money-bill-wave"></i> Amount
+                                </label>
+                                <input type="number" id="transaction-amount" class="form-control" placeholder="0.00" step="0.01">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label class="form-label" for="transaction-description">
+                                    <i class="far fa-edit"></i> Description
+                                </label>
+                                <input type="text" id="transaction-description" class="form-control" placeholder="Enter transaction description">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Select Category</label>
+                            <div class="category-selector" id="category-selector">
+                                <div class="category-btn" data-category="salary">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <span>Salary</span>
+                                </div>
+                                <div class="category-btn" data-category="freelance">
+                                    <i class="fas fa-laptop-code"></i>
+                                    <span>Freelance</span>
+                                </div>
+                                <div class="category-btn" data-category="investment">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Investment</span>
+                                </div>
+                                <div class="category-btn" data-category="food">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Food & Dining</span>
+                                </div>
+                                <div class="category-btn" data-category="transportation">
+                                    <i class="fas fa-car"></i>
+                                    <span>Transportation</span>
+                                </div>
+                                <div class="category-btn" data-category="shopping">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Shopping</span>
+                                </div>
+                                <div class="category-btn" data-category="entertainment">
+                                    <i class="fas fa-film"></i>
+                                    <span>Entertainment</span>
+                                </div>
+                                <div class="category-btn" data-category="bills">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    <span>Bills & Utilities</span>
+                                </div>
+                                <div class="category-btn" data-category="health">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <span>Health & Fitness</span>
+                                </div>
+                                <div class="category-btn" data-category="education">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Education</span>
+                                </div>
+                                <div class="category-btn" data-category="other">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                    <span>Other</span>
+                                </div>
+                            </div>
+                            <!-- Hidden input to store selected category -->
+                            <input type="hidden" id="selected-category" value="">
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="transaction-payment">
+                                    <i class="far fa-credit-card"></i> Payment Method
+                                </label>
+                                <select id="transaction-payment" class="form-control">
+                                    <option value="credit-card">Credit Card</option>
+                                    <option value="debit-card">Debit Card</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="bank-transfer">Bank Transfer</option>
+                                    <option value="digital-wallet">Digital Wallet</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="transaction-notes">
+                                    <i class="far fa-sticky-note"></i> Notes (Optional)
+                                </label>
+                                <input type="text" id="transaction-notes" class="form-control" placeholder="Add any additional notes">
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-primary btn-lg" id="save-transaction-btn">
+                                <i class="fas fa-save"></i> Save Transaction
+                            </button>
+                            <button class="btn btn-secondary btn-lg" id="clear-form-btn">
+                                <i class="fas fa-times"></i> Clear Form
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Reports Page -->
+            <section id="reports-page" class="page">
+                <div class="page-header">
+                    <h2 class="page-title">Financial Reports</h2>
+                </div>
+                
+                <div class="filters-container">
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label for="report-type">Transaction Type</label>
+                            <select id="report-type">
+                                <option value="all">All Transactions</option>
+                                <option value="income">Income Only</option>
+                                <option value="expense">Expenses Only</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="report-category">Category</label>
+                            <select id="report-category">
+                                <option value="all">All Categories</option>
+                                <option value="salary">Salary</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="food">Food & Dining</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="entertainment">Entertainment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date-range">Date Range</label>
+                            <select id="date-range">
+                                <option value="all">All Time</option>
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="quarter">This Quarter</option>
+                                <option value="year">This Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="custom-date-range" style="display: none; margin-top: 20px;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="start-date">Start Date</label>
+                                <input type="date" id="start-date" value="2023-05-01">
+                            </div>
+                            <div class="form-group">
+                                <label for="end-date">End Date</label>
+                                <input type="date" id="end-date" value="2023-05-31">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions" style="margin-top: 25px;">
+                        <button class="btn btn-primary" id="generate-report-btn">
+                            <i class="fas fa-chart-bar"></i> Generate Report
+                        </button>
+                        <button class="btn btn-secondary" id="clear-filters-btn">
+                            <i class="fas fa-redo"></i> Clear Filters
+                        </button>
+                        <button class="btn btn-secondary" id="export-report-btn">
+                            <i class="fas fa-download"></i> Export Report
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="report-results">
+                    <h3 style="margin-bottom: 20px;">Filtered Transactions</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Payment Method</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-transactions">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- All Transactions Page -->
+            <section id="transactions-page" class="page">
+                <div class="page-header">
+                    <h2 class="page-title">All Transactions</h2>
+                </div>
+                
+                <div class="report-results">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Payment</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-transactions">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
